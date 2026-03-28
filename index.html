@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+/// @title IHyperliquidExchange
+/// @notice Interfaccia del precompile HyperEVM per interagire con il motore
+///         di trading Hyperliquid L1.
+/// @dev    Deployato a 0x0000000000000000000000000000000000000800 su HyperEVM.
+///         Docs: https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm
+interface IHyperliquidExchange {
+
+    /// @notice Piazza un ordine sul Hyperliquid L1.
+    /// @param asset      Indice dell'asset (0=BTC, 1=ETH, ... vedi docs HL).
+    /// @param isBuy      true = long/buy, false = short/sell.
+    /// @param limitPx    Prezzo in USD × 1e6. Passa 0 per ordini market.
+    /// @param sz         Dimensione in unità base × 1e5 (es. 0.1 BTC = 10000).
+    /// @param reduceOnly Se true, riduce solo posizioni esistenti (no nuove aperture).
+    /// @param orderType  2 = market, 3 = limit GTC, 4 = limit IOC.
+    /// @param cloid      Client Order ID per tracking e cancellazione.
+    function placeOrder(
+        uint32  asset,
+        bool    isBuy,
+        uint64  limitPx,
+        uint64  sz,
+        bool    reduceOnly,
+        uint8   orderType,
+        uint64  cloid
+    ) external;
+
+    /// @notice Cancella un ordine pendente tramite client order ID.
+    /// @param asset  Indice dell'asset.
+    /// @param cloid  Client Order ID dell'ordine da cancellare.
+    function cancelOrder(uint32 asset, uint64 cloid) external;
+
+    /// @notice Imposta un referrer per questo contratto.
+    function setReferrer(address referrer) external;
+}
