@@ -1,0 +1,44 @@
+# ── Secrets ──────────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+dist/
+.cache/
+*.local
+
+# ── Foundry / Solidity ────────────────────────────────────────────────────────
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+contracts/lib/
+
+# ── IDEs ──────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
